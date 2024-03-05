@@ -6,9 +6,12 @@ import {
   signInSuccess,
   signInFailure,
 } from '../redux/user/userSlice';
-const SignIn = () => {
+import OAuth from "../Componenets/OAuth";
+
+
+function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading , error } = useSelector((state) => state.user); 
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,6 +21,7 @@ const SignIn = () => {
       [e.target.id]: e.target.value,
     });
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +46,8 @@ const SignIn = () => {
       dispatch(signInFailure(error.message));
     }
   };
+
+
   // console.log(formData);
   return (
     <div className="flex justify-center">
@@ -53,21 +59,20 @@ const SignIn = () => {
             placeholder="email"
             className="border p-3 rounded-lg"
             id="email"
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           <input
             type="password"
             placeholder="password"
             className="border p-3 rounded-lg"
             id="password"
-            onChange={handleChange}
-          />
+            onChange={handleChange} />
           <button
             disabled={loading}
             className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-95"
           >
             {loading ? "Loading..." : "Sign In"}
           </button>
+          <OAuth />
         </form>
         <div className="flex gap-2 mt-5">
           <p>Don't have an account?</p>
@@ -79,6 +84,6 @@ const SignIn = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SignIn;
