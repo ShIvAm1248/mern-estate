@@ -115,15 +115,15 @@ const Profile = () => {
   const handleSignOut = async () => {
     try {
       dispatch(signOutUserStart());
-      const res = await fetch("/api/auth/signout");
+      const res = await fetch('/api/auth/signout');
       const data = await res.json();
       if (data.success === false) {
-        dispatch(signOutUserFailure(data.message));
+        dispatch(deleteUserFailure(data.message));
         return;
       }
-      dispatch(signOutUserSuccess(data));
+      dispatch(deleteUserSuccess(data));
     } catch (error) {
-      dispatch(signOutUserFailure(error.message));
+      dispatch(deleteUserFailure(data.message));
     }
   };
 
@@ -226,8 +226,8 @@ const Profile = () => {
           Create Listing
         </Link>
       </form>
-      <div onClick={handleDeleteUser} className="flex justify-between mt-5">
-        <span className="text-red-700 cursor-pointer">Delete account</span>
+      <div className="flex justify-between mt-5">
+        <span onClick={handleDeleteUser}  className="text-red-700 cursor-pointer">Delete account</span>
         <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
           Sign out
         </span>
